@@ -191,10 +191,10 @@ object ScreenshotVaultManager {
         if (!file.exists()) return false
         return try {
             val values = ContentValues().apply {
-                put(MediaStore.Images.Media.DISPLAY_NAME, "ClipShot_${item.id}.png")
+                put(MediaStore.Images.Media.DISPLAY_NAME, "Cropboard_${item.id}.png")
                 put(MediaStore.Images.Media.MIME_TYPE, "image/png")
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/ClipShot")
+                    put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Cropboard")
                     put(MediaStore.Images.Media.IS_PENDING, 1)
                 }
             }

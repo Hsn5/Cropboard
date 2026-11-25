@@ -28,6 +28,18 @@ class ScreenshotAccessibilityService : AccessibilityService() {
     companion object {
         const val ACTION_VAULT_UPDATED = "com.example.clipshot.ACTION_VAULT_UPDATED"
 
+        private val ALLOWED_BROWSER_PACKAGES = setOf(
+            "com.android.chrome",
+            "com.sec.android.app.sbrowser",
+            "com.microsoft.emmx",
+            "com.brave.browser",
+            "com.opera.browser",
+            "org.mozilla.firefox",
+            "com.vivaldi.browser",
+            "com.duckduckgo.mobile.android",
+            "com.kiwibrowser.browser"
+        )
+
         var instance: ScreenshotAccessibilityService? = null
             private set
 
@@ -347,6 +359,11 @@ class ScreenshotAccessibilityService : AccessibilityService() {
         } catch (_: Exception) {
             null
         } ?: return null
+
+        val activePackage = root.packageName?.toString()
+        if (activePackage == null || activePackage !in ALLOWED_BROWSER_PACKAGES) {
+            return null
+        }
 
         val knownUrlIds = listOf(
             "com.android.chrome:id/url_bar",
